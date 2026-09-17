@@ -8,7 +8,7 @@ const Add_investor = () => {
   return (
     <>
       {clickinvestors==="Add-investors" &&
-        Confirm("Confirm-S",<Add_investorContent  />
+        Confirm("Confirm-L",<Add_investorContent  />
          
         )}
     </>
