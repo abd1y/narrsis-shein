@@ -577,3 +577,26 @@ background-color: var(--MenuAactive);
 .btm-transaction-mone-child:hover{
     background-color: rgb(104, 61, 120);
 }
+.delivery{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin: 2vh 2vh;
+}
+input[type="checkbox"].delivery-checkbox{
+       appearance: none;
+   display: inline-block;
+    background-color:white;
+    width: 0.2vh;
+    height: 0.2vh;
+    border-radius: 50%;
+    cursor: pointer;
+    margin:0 1vh;
+}
+input[type="checkbox"].delivery-checkbox:checked {
+     background-color: var(--MenuAactive);
+    background-image: url("../src/assets/check-symbol.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 80%;
+}

@@ -7,7 +7,7 @@
         const open_configration_reomv=useSelector((s)=>{
     return s.whoclick.value
         })
-    
+
         const dispatch=useDispatch()
     return (
     <div className='Table'>
@@ -24,12 +24,12 @@
         <th className="list-Table-child">  تاريخ  الطلب</th>
         <th className="list-Table-child"> اسم زبون</th>
         <th className="list-Table-child">  سعر للزبون</th>
+        <th className="list-Table-child"> عربون </th>
         <th className="list-Table-child">التكلفه</th>
         <th className="list-Table-child">حجم طلب <small>(kg)</small></th>
-        <th className="list-Table-child">مجموع سعر لكل كم</th>
-        <th className="list-Table-child"> سعر التوصيل الاجمال</th>
+        <th className="list-Table-child"> سعر التوصيل + سعر كامل لـ KG</th>
         <th className="list-Table-child"> الربح صافي</th>
-        <th className="list-Table-child"> مجموع الارباح</th>
+        <th className="list-Table-child">  سعر الاجمالي لزبون</th>
         <th className="list-Table-child">تعديل</th>
             <th className="list-Table-child">حذف</th>
 
@@ -39,11 +39,11 @@
         <td className="list-Table-info"> 1</td>
         <td className="list-Table-info"> 2027/1/1</td>
         <td className="list-Table-info"> نرجس</td>
-        <td className="list-Table-info"> 1,250,450</td>
+        <td className="list-Table-info">50,450</td>
+        <td className="list-Table-info"> 0</td>
         <td className="list-Table-info">153,250</td>
         <td className="list-Table-info">4</td>
-        <td className="list-Table-info">8,000</td>
-        <td className="list-Table-info">10,000</td>
+        <td className="list-Table-info" >10,000</td>
         <td className="list-Table-info">950,000</td>
         <td className="list-Table-info">1,500,000</td>
         <td className="list-Table-info"onClick={()=>dispatch(configretionSlider("updat_Requst"))}><Pen_icon/></td>
@@ -57,9 +57,9 @@
                 <td className="list-Table-info"> 2027/1/1</td>
         <td className="list-Table-info"> نرجس</td>
         <td className="list-Table-info"> 1,250,450</td>
+        <td className="list-Table-info"> 250,450</td>
         <td className="list-Table-info">153,250</td>
         <td className="list-Table-info">4</td>
-        <td className="list-Table-info">8,000</td>
         <td className="list-Table-info">10,000</td>
         <td className="list-Table-info">950,000</td>
         <td className="list-Table-info">1,500,000</td>
