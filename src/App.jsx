@@ -10,14 +10,14 @@ import Add_Request from "./Compont/Add_Request"
 import Updat_Request from "./Compont/Updat_Request"
 import AddDivided from "./Compont/AddDivided"
 import BalanceTransaction from "./Compont/BalanceTransaction"
-
+import { Toaster } from "react-hot-toast";
 function App() {
   return (
    <>
+<Toaster/>
 <Header/>
 <Login/>
 <Menu/>
-
 <Routes>
   <Route path="/" element={<Navigate to="/investors" replace/>}/> 
   <Route path='/investors' element={<Investors />}/>

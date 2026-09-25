@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialSlice={
-    value:null
+    value:null,
+    Auth:false
 }
 
 export const click_configretion=createSlice({
@@ -10,8 +11,11 @@ export const click_configretion=createSlice({
     reducers:{
         configretionSlider:(s,action)=>{
             s.value=action.payload
+        },
+        AuthSlider:(s,action)=>{
+            s.Auth=action.payload
         }
     }
 })
-export const{configretionSlider} =click_configretion.actions
+export const{configretionSlider,AuthSlider} =click_configretion.actions
 export default click_configretion.reducer

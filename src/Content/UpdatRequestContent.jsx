@@ -20,6 +20,12 @@ const UpdatRequestContent = () => {
                                <input type='number' className='add-input-content'/>
           <p className='add-text-content'> سعر التوصيل :</p>
            <input type='number' className='add-input-content'/>
+           <div className="delivery">
+
+      
+           <input type="checkbox"  className="delivery-checkbox"/>
+           <p >هل تريد اضافه 5,000 د.ع اجرة توصيل </p>
+                </div>
                   <button className="btm-content">
                          <p> تعديل الطلب</p>
                         

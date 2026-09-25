@@ -9,13 +9,12 @@ const [Error,setErorr]=useState(false)
 
   return (
 <>
-    {
     
-        loding?
-        (<Loding/>):
+    
+        {loding &&<Loding/>}
         
-        (Error?(<Erorr_page/>):<Investors_content/>)
-    }
+      {  Error?(<Erorr_page/>):<Investors_content setloding={setloding} setErorr={setErorr}/>}
+    
 </>
 
 

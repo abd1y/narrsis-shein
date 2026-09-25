@@ -3,12 +3,51 @@ import Confirm from '../Modles/Confirm'
 import Remove_investorContent from './Remove_investorContent'
 import {useDispatch,useSelector } from 'react-redux'
 import { configretionSlider } from '../Redux/Content/ClickConfigretion'
-const Investors_content = () => {
+import API from "../API/Axios";
+import { useState,useEffect } from 'react'
+const Investors_content = ({setErorr,setloding}) => {
     const open_configration_remov=useSelector((s)=>{
     return s.whoclick.value
 })
-
+//  data States
+// const [InvestorsUser,setInvestorsUser]=useState()
+// const [profits,setprofits]=useState()
+// const [Customs,setCustoms]=useState()
+// const [Withdrawn,setWithdrawn]=useState()
+// const [investedMone,setinvestedMone]=useState()
+const [info,setinfo]=useState([])
+const Token=localStorage.getItem("Token")
   const dispatch=useDispatch()
+  useEffect(()=>{
+    setloding(true)
+    API.get('investors/getInvestors/',
+    {      headers:{
+    Authorization:`Token ${Token}`
+  }}
+)
+
+    .then(res=>{
+     const Info_invester=res.data.Investors.map((item)=>(
+       { 
+        id: item.id,
+        InvestorsName:item.InvestorsName,
+        InvestorsUser:item.InvestorsUser,
+        profits:item.profits,
+        Customs:item.Customs,
+        investedMone:item.investedMone,
+        Withdrawn:item.Withdrawn
+        
+    }
+    
+     ))
+     setloding(false)
+     setinfo(Info_invester)
+    })
+    .catch(err=>{
+        setErorr(true)
+        setloding(false)
+    })
+  },[])
   return (
   <div className='Table'>
         <div className='main-item-Table'>
@@ -30,14 +69,17 @@ const Investors_content = () => {
     <th className="list-Table-child list-delete-child">سحب او ايداع</th>
     <th className="list-Table-child list-delete-child"> حذف</th>
 </tr>
-<tr className='main-list-Table'>
-    <td className="list-Table-info"> 1</td>
-    <td className="list-Table-info"> نرجس</td>
-    <td className="list-Table-info"> Nana192092</td>
-    <td className="list-Table-info">0</td>
-    <td className="list-Table-info">12,000</td>
-    <td className="list-Table-info">12,000</td>
-    <td className="list-Table-info">153,250</td>
+{
+info.map((item,index)=>(
+    
+   <tr className='main-list-Table' key={item.id} id={item.id}>
+    <td className="list-Table-info"> {index+1}</td>
+    <td className="list-Table-info"> {item.InvestorsName}</td>
+    <td className="list-Table-info"> {item.InvestorsUser}</td>
+    <td className="list-Table-info">{item.Customs.toLocaleString()}</td>
+    <td className="list-Table-info">{item.Withdrawn.toLocaleString()}</td>
+    <td className="list-Table-info">{item.investedMone.toLocaleString()}</td>
+    <td className="list-Table-info">{item.profits.toLocaleString()}</td>
     <td className="list-Table-info"  onClick={()=>{dispatch(configretionSlider("balance-Transaction"))}}>
         <WithdrawMoney/>
     </td>
@@ -46,6 +88,10 @@ const Investors_content = () => {
         </td> 
 
 </tr>
+))
+
+}
+
 
 
 

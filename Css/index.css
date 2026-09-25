@@ -488,7 +488,7 @@ width: 8vh;
 .icon_bin{
     width: 5vh;
 }
-.icon_bin:hover{
+.icon_bin_hover:hover{
     transition: 0.6s;
     cursor: pointer;
     color: rgb(255, 0, 0);
