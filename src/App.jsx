@@ -11,16 +11,24 @@ import Updat_Request from "./Compont/Updat_Request"
 import AddDivided from "./Compont/AddDivided"
 import BalanceTransaction from "./Compont/BalanceTransaction"
 import { Toaster } from "react-hot-toast";
+import { useSelector } from "react-redux"
 function App() {
+  const Token = useSelector((state) =>{
+    return state.Token.value
+  } )
+
   return (
    <>
 <Toaster/>
-<Header/>
-<Login/>
-<Menu/>
+<Header />
+<Login />
+<Menu />
 <Routes>
-  <Route path="/" element={<Navigate to="/investors" replace/>}/> 
-  <Route path='/investors' element={<Investors />}/>
+  <Route path="/" element={<Navigate to={"/Requests"} replace/>}/> 
+  {
+Token&&
+  <Route path='/investors' element={<Investors/>}/>
+  }
   <Route path='/Requests' element={<Requests/>}/>
   <Route path='/divided' element={<Divided/>}/>
 
@@ -30,7 +38,7 @@ function App() {
 <Add_Request/>
 <Updat_Request/>
 <AddDivided/>
-<BalanceTransaction/>
+<BalanceTransaction />
    </>
   )
 }

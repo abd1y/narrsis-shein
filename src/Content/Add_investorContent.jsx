@@ -1,8 +1,13 @@
-import React from 'react'
+import {useState} from 'react'
 import { Add_new_investor,Close_configration } from "../Compont/Svg";
-
+import { Creat_investor } from '../API/ApiContent/APIInvestors';
 
 const Add_investorContent = () => {
+  const [InvestorsName,setInvestorsName]=useState("")
+  const [InvestorsUser,setInvestorsUser]=useState("")
+  const [investedMone,setinvestedMone]=useState(0)
+  const [Customs,setCustoms]=useState(0)
+  const creat_investor=Creat_investor(InvestorsName,InvestorsUser,investedMone,Customs)
   return (
   <>
 
@@ -10,19 +15,20 @@ const Add_investorContent = () => {
           <Close_configration/>
   <div className='confration-content-M'>
             <p className="add-text-content"> اسم المستثمر:</p>
-            <input className="add-input-content" type="text" />
+            <input className="add-input-content" type="text"  value={InvestorsName} onChange={(e)=>{setInvestorsName(e.target.value)}}/>
             <p className="add-text-content">  اسم المستخدم<small>(اقصى حد للحروف هو عشرة)</small>:</p>
-            <input className="add-input-content" type="text" maxLength={10} />
+            <input className="add-input-content" type="text" maxLength={10}  value={InvestorsUser} onChange={(e)=>{setInvestorsUser(e.target.value)}} />
             <p className="add-text-content">
               مبلغ المستثمر <small>(مع اضافه الاصفار):</small>
             </p>
-            <input className="add-input-content" type="number" /><samp>د.ع</samp>
+            <input className="add-input-content" type="number" value={investedMone}
+             onChange={(e)=>{setinvestedMone(Number(e.target.value))}}/><samp>د.ع</samp>
             <p className="add-text-content">
           
               مدفوعات الكمركيه <small> (ان وجدت):</small>
             </p>
-            <input className="add-input-content" type="number" /><samp>د.ع</samp>
-            <button className="btm-content">
+            <input className="add-input-content" type="number" value={Customs} onChange={(e)=>{setCustoms(Number(e.target.value))}} /><samp>د.ع</samp>
+            <button onClick={()=>{creat_investor()}} className="btm-content" >
               <p> اضافة</p>
               <Add_new_investor /> 
             </button>

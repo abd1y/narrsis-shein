@@ -1,28 +1,23 @@
 import { Icon_page,Icon_login,Icon_logout } from './Svg'
-import { useState } from 'react'
+
 import {  useDispatch,useSelector } from 'react-redux'
-import { configretionSlider,AuthSlider } from '../Redux/Content/ClickConfigretion'
+import { configretionSlider } from '../Redux/Content/ClickConfigretion'
+import { LogoutToken } from '../Redux/Content/TokenSlice'
     const Header = () => {
         const dispatch=useDispatch()
         const status= useSelector((s)=>{
             return s.whoclick.value
         })
-        const isAuth=useSelector((s)=>{
-             return s.whoclick.Auth
-        })
-
-        const [Token,setToken]=useState(
-            localStorage.getItem("Token")
-        )
+       const Token = useSelector((state) =>{
+         return state.Token.value
+       })
         const LogoutHandler=()=>{
-         localStorage.removeItem("Token")
-    setToken(null)
+            localStorage.removeItem("Token")
     dispatch(configretionSlider(null))
-    dispatch(AuthSlider(false))
-     
+     dispatch(LogoutToken())
         }
         const AuthHandler =()=>{
-               if (Token || isAuth) {
+               if (Token) {
         LogoutHandler()
     } else {
         dispatch(configretionSlider("Log-in"))
@@ -44,7 +39,7 @@ import { configretionSlider,AuthSlider } from '../Redux/Content/ClickConfigretio
         </div>
         <button  className='Icon-auth' title={ status==="log-out"?'تسجيل خروج':'تسجيل دخول'} onClick={()=>AuthHandler()}>
            {
-            Token || isAuth?(<Icon_logout />):(<Icon_login/>)
+            Token ?(<Icon_logout />):(<Icon_login/>)
            }
 
         </button>

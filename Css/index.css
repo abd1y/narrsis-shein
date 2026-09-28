@@ -360,7 +360,7 @@ background-color: var(--MenuAactive);
 .Table{
     user-select: none;
     width: 100%;
-    height: 72vh;
+    height: 77vh;
    overflow-y: auto;
 
     
@@ -467,7 +467,19 @@ width: 8vh;
     justify-content: center;
 }
 .btm-content:hover{
-    background-color:rgb(94, 54, 108) ;
+        background-color: rgb(89, 49, 104);
+}
+.Withdraw-btm-content{
+    background-color: red;
+}
+.Withdraw-btm-content:hover{
+     background-color: rgb(210, 4, 4);
+}
+.Deposit-money-btm-content{
+    background-color: green;
+}
+.Deposit-money-btm-content:hover{
+    background-color: rgb(1, 96, 1);
 }
 .btm-content .Add-new-investor{
     width: 5vh;

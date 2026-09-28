@@ -9,7 +9,8 @@ import {
 import API from "../API/Axios";
 import Notifications from '../Modles/NaficationMessgeModel';
 import {  useDispatch } from 'react-redux'
-import { configretionSlider,AuthSlider } from '../Redux/Content/ClickConfigretion'
+import { configretionSlider } from '../Redux/Content/ClickConfigretion'
+import { LoginToken } from '../Redux/Content/TokenSlice';
 const LoginContent = () => {
   const dispatch = useDispatch()
   // useStates
@@ -35,7 +36,8 @@ const LoginContent = () => {
   Notifications('تم تسجيل الدخول بنجاح',"correct")
         localStorage.setItem("Token",res.data.Token)
         dispatch(configretionSlider("log-out"))
-        dispatch(AuthSlider(true))
+        
+dispatch(LoginToken(res.data.Token))
       })
       .catch(err=>{
         setloding(false)

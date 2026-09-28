@@ -3,51 +3,20 @@ import Confirm from '../Modles/Confirm'
 import Remove_investorContent from './Remove_investorContent'
 import {useDispatch,useSelector } from 'react-redux'
 import { configretionSlider } from '../Redux/Content/ClickConfigretion'
-import API from "../API/Axios";
-import { useState,useEffect } from 'react'
-const Investors_content = ({setErorr,setloding}) => {
-    const open_configration_remov=useSelector((s)=>{
-    return s.whoclick.value
-})
-//  data States
-// const [InvestorsUser,setInvestorsUser]=useState()
-// const [profits,setprofits]=useState()
-// const [Customs,setCustoms]=useState()
-// const [Withdrawn,setWithdrawn]=useState()
-// const [investedMone,setinvestedMone]=useState()
-const [info,setinfo]=useState([])
-const Token=localStorage.getItem("Token")
-  const dispatch=useDispatch()
+import { APIgetInvestors } from '../API/ApiContent/APIInvestors'
+import { useEffect } from 'react'
+import { clickValueHandler } from '../Redux/Content/ClickConfigretion'
+const Investors_content = () => {
+const dispatch=useDispatch()
+    const info=useSelector((status)=>{return status.infoValue.info})
+//  Redux
+const open_configration_remov=useSelector((s)=>{return s.whoclick.value})
+const Token = useSelector((state) =>{return state.Token.value})
+// function API
+const getinvester=APIgetInvestors()
   useEffect(()=>{
-    setloding(true)
-    API.get('investors/getInvestors/',
-    {      headers:{
-    Authorization:`Token ${Token}`
-  }}
-)
-
-    .then(res=>{
-     const Info_invester=res.data.Investors.map((item)=>(
-       { 
-        id: item.id,
-        InvestorsName:item.InvestorsName,
-        InvestorsUser:item.InvestorsUser,
-        profits:item.profits,
-        Customs:item.Customs,
-        investedMone:item.investedMone,
-        Withdrawn:item.Withdrawn
-        
-    }
-    
-     ))
-     setloding(false)
-     setinfo(Info_invester)
-    })
-    .catch(err=>{
-        setErorr(true)
-        setloding(false)
-    })
-  },[])
+getinvester()
+  },[Token])
   return (
   <div className='Table'>
         <div className='main-item-Table'>
@@ -72,7 +41,7 @@ const Token=localStorage.getItem("Token")
 {
 info.map((item,index)=>(
     
-   <tr className='main-list-Table' key={item.id} id={item.id}>
+   <tr className='main-list-Table' key={item.id} >
     <td className="list-Table-info"> {index+1}</td>
     <td className="list-Table-info"> {item.InvestorsName}</td>
     <td className="list-Table-info"> {item.InvestorsUser}</td>
@@ -80,31 +49,34 @@ info.map((item,index)=>(
     <td className="list-Table-info">{item.Withdrawn.toLocaleString()}</td>
     <td className="list-Table-info">{item.investedMone.toLocaleString()}</td>
     <td className="list-Table-info">{item.profits.toLocaleString()}</td>
-    <td className="list-Table-info"  onClick={()=>{dispatch(configretionSlider("balance-Transaction"))}}>
-        <WithdrawMoney/>
+    
+    <td className="list-Table-info"  onClick={()=>
+{
+dispatch(clickValueHandler(item.id))
+dispatch(configretionSlider("balance-Transaction"))
+}
+}>
+    <WithdrawMoney/>
     </td>
-      <td  className="list-Table-info Delete_Table" onClick={()=>dispatch(configretionSlider("Remove-investors"))}>
-      <Delete_bin/>
-        </td> 
+<td  className="list-Table-info Delete_Table" onClick={()=>
+{
+dispatch(clickValueHandler(item.id))
+dispatch(configretionSlider("Remove-investors"))
+}
+}>
+<Delete_bin/>
+</td> 
 
 </tr>
 ))
 
 }
-
-
-
-
-    <button className='Add-Table'   onClick={()=>{dispatch(configretionSlider("Add-investors"))}}>
-
-
+    <button className='Add-Table' 
+      onClick={()=>{dispatch(configretionSlider("Add-investors"))}}>
     <Add_content/>
     </button>
-{
-      open_configration_remov==="Remove-investors" &&(
-          Confirm("Confirm-S",<Remove_investorContent />)
-      )
-}
+{open_configration_remov==="Remove-investors" &&
+(Confirm("Confirm-S",<Remove_investorContent  />))}
 </table>
  </div>
     </div>
@@ -112,5 +84,3 @@ info.map((item,index)=>(
 }
 
 export default Investors_content
-{/* <td>{item.price.toLocaleString()}</td> اذا رقم */}
-{/* <td>{Number(item.price).toLocaleString()}</td> اذا نص  */}
