@@ -331,7 +331,7 @@ input{
 }
 .Main-Menu{
     user-select: none;
-  
+  border-bottom: 1px solid white;
 
 }
 .Menu{
