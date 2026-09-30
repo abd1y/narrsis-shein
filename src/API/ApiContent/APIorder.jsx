@@ -50,6 +50,7 @@ const dispach=useDispatch()
   })
   const Token = useSelector((state) =>{return state.Token.value})
   const edate_order=()=>{
+      dispach(statushandler(true))
     Notifications("","Loding")
 API.put('orders/ubdate_order/',
     {
@@ -62,6 +63,10 @@ order_size:order_item.order_size,
 price_per_km:order_item.price_per_km,
 total_delivery_price:order_item.total_delivery_price,
 delivery_price:order_item.delivery_price,
+cost_price:order_item.cost_price,
+order_total:order_item.order_total,
+net_profit:order_item.net_profit,
+total_price_per_kg:order_item.total_price_per_kg,
 },
 {
     headers:{
@@ -71,16 +76,20 @@ delivery_price:order_item.delivery_price,
     }
 })
 .then(res=>{
+
     Notifications(res.data.Msg,'correct')
     dispach(configretionSlider(null)) 
     dispach(save_edit_order({      
         id: order_item.id,
-          orders: order_item
+          orders: res.data.order
         }))
 })
 .catch(err=>{
       Notifications(err.response.data.erorr,"error")
 })
+.finally(()=>{
+         dispach(statushandler(false))
+      })
   }
   return edate_order
 }
@@ -92,6 +101,7 @@ const dispach=useDispatch()
    return s.order_value.order_update
   })
   const remove_orders=()=>{
+      dispach(statushandler(true))
     Notifications("","Loding")
 API.delete('orders/delete_order/',
     {
@@ -114,6 +124,9 @@ API.delete('orders/delete_order/',
 .catch(err=>{
       Notifications(err.response.data.erorr,"error")
 })
+  .finally(()=>{
+         dispach(statushandler(false))
+      })
   }
 return remove_orders
 }
@@ -130,6 +143,7 @@ export const CreateOrder=
   const dispach=useDispatch()
  const Token = useSelector((state) =>{return state.Token.value})
  const createorder=()=>{
+  dispach(statushandler(true))
   Notifications("","Loding")
   API.post('orders/create_order/',
     {
@@ -156,7 +170,9 @@ export const CreateOrder=
   .catch(err=>{
         Notifications(err.response.data.erorr,"error")
   })
-  
+       .finally(()=>{
+         dispach(statushandler(false))
+      })
  }
  return createorder
 }

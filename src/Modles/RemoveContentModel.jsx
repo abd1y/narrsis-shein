@@ -1,9 +1,13 @@
 
-import { useDispatch } from 'react-redux'
+import { useDispatch,useSelector } from 'react-redux'
 import { configretionSlider } from '../Redux/Content/ClickConfigretion'
 
 const RemoveContentModel = (nameDelet,handler) => {
     const dispatch=useDispatch()
+         const status=useSelector((s)=>{
+return s.staus.statusValue
+  })
+
   return (
  <div className='cheack_content'>
 <h2 className='title-cheack_content'>
@@ -11,7 +15,7 @@ const RemoveContentModel = (nameDelet,handler) => {
 
     </h2>
 <div className='btm-cheack_content'>
-    <button className='btm-cheack_content-child Agreed-cheack_content'  onClick={handler} > نعم</button>
+    <button disabled={status} className='btm-cheack_content-child Agreed-cheack_content'  onClick={handler} > نعم</button>
     <button className='btm-cheack_content-child' onClick={()=>{dispatch(configretionSlider(null))}} > لا</button>
 </div>
     </div>

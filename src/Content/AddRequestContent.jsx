@@ -1,6 +1,7 @@
 import { Close_configration } from "../Compont/Svg";
 import { CreateOrder } from "../API/ApiContent/APIorder";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 const AddRequestContent = () => {
   const [Customer_name,setCustomer_name]=useState("")
   const [customer_deposit,setcustomer_deposit]=useState(0)
@@ -21,6 +22,10 @@ const AddRequestContent = () => {
     total_delivery_price,
     delivery_price
   )
+       const status=useSelector((s)=>{
+return s.staus.statusValue
+  })
+
   return (
     <>
  <Close_configration/>
@@ -98,7 +103,7 @@ const AddRequestContent = () => {
            />
            <p >هل تريد اضافه 5,000 د.ع اجرة توصيل </p>
                 </div>
-           <button className="btm-content" onClick={()=>{creatorder()}}>
+           <button disabled={status} className="btm-content" onClick={()=>{creatorder()}}>
                          <p> اضافة الطلب</p>
                         
                        </button>

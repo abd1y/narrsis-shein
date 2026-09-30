@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialSlice={
     LodingValue:false,
-    ErorrValue:false
+    ErorrValue:false,
+    statusValue:false
 }
 const RequestState=createSlice({
     name:"RequestState",
@@ -14,7 +15,10 @@ const RequestState=createSlice({
         seterorr:(s,action)=>{
             s.ErorrValue=action.payload
         },
+        statushandler:(s,action)=>{
+s.status=action.payload
+        }
     }
 })
-export const {setloding,seterorr} =RequestState.actions
+export const {setloding,seterorr,statushandler} =RequestState.actions
 export default RequestState.reducer

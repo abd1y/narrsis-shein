@@ -33,7 +33,7 @@ getOrder()
     <tr className='main-list-Table'>
         <th className="list-Table-child"> رقم طلب </th>
         <th className="list-Table-child">  تاريخ  الطلب</th>
-        <th className="list-Table-child"> اسم زبون</th>
+        <th className="list-Table-child" style={{width:"10%"}}> اسم زبون</th>
         <th className="list-Table-child">  سعر للزبون</th>
         <th className="list-Table-child"> عربون </th>
         <th className="list-Table-child">التكلفه</th>
@@ -49,7 +49,7 @@ getOrder()
     {
         order.map((item)=>(
                 <tr className='main-list-Table' key={item.id} id={item.id}>
-        <td className="list-Table-info"> {item.number_order}</td>
+        <td className="list-Table-info" > {item.number_order}</td>
         <td className="list-Table-info" style={{width:"15%"}}>{item.order_data}</td>
         <td className="list-Table-info"> {item.Customer_name}</td>
         <td className="list-Table-info"> {item.selling_price.toLocaleString()}</td>
@@ -57,8 +57,12 @@ getOrder()
         <td className="list-Table-info">{item.cost_price.toLocaleString()}</td>
         <td className="list-Table-info" title={`سعر الـ kg الواحد هو ${item.price_per_km.toLocaleString()}د.ع`}>{item.order_size}</td>
         <td className="list-Table-info" 
-        title={`سعر الكامل لكل kg هو ${item.total_price_per_kg.toLocaleString()}د.ع و سعر  تكلفه توصيل الطلبيه هو ${item.total_delivery_price.toLocaleString()}د.ع و سعر توصيل الى بيت الزبون هو ${item.delivery_price.toLocaleString()}د.ع`} >
-            {(item.total_price_per_kg +item.total_delivery_price +item.delivery_price).toLocaleString()}</td>
+        title={`سعر الكامل لكل kg هو ${ Number(item.price_per_km *item.order_size).toLocaleString()}د.ع و سعر  تكلفه توصيل الطلبيه هو ${item.total_delivery_price.toLocaleString()}د.ع و سعر توصيل الى بيت الزبون هو ${item.delivery_price.toLocaleString()}د.ع`} >
+{(
+  Number(item.price_per_km *item.order_size) +
+  Number(item.total_delivery_price) +
+  Number(item.delivery_price)
+).toLocaleString()}</td>
         <td className="list-Table-info">{item.net_profit.toLocaleString()}</td>
         <td className="list-Table-info">{item.order_total.toLocaleString()}</td>
         <td className="list-Table-info"onClick={

@@ -2,10 +2,12 @@ import { Close_configration } from "../Compont/Svg";
 import { useSelector,useDispatch } from "react-redux";
 import { set_edit_order } from "../Redux/Content/Order_Redux";
 import { Edate_Order } from "../API/ApiContent/APIorder";
-
 const UpdatRequestContent = () => {
   const order_item=useSelector((s)=>{
    return s.order_value.order_update
+  })
+       const status=useSelector((s)=>{
+return s.staus.statusValue
   })
 
 const dispach=useDispatch()
@@ -44,19 +46,30 @@ const edate_order=Edate_Order()
           dispach(set_edit_order(
             {
               field:"selling_price",
-             value: e.target.value
+             value: Number(e.target.value)
+            }
+          ))
+        }}
+        /><samp className='text-denar'>د.ع</samp>
+        <p className='add-text-content'>العموله المرسله من قبل الزبون :</p>
+        <input type='number' className='add-input-content'  min="0" value={order_item.customer_deposit }
+         onChange={(e)=>{
+          dispach(set_edit_order(
+            {
+              field:"customer_deposit",
+             value: Number(e.target.value)
             }
           ))
         }}
         /><samp className='text-denar'>د.ع</samp>
 
          <p className='add-text-content'> التكلفه الاجماليه <small>(سعر طلب على المستثمرين):</small></p>
-         <input type='number' className='add-input-content' min="0" value={order_item.customer_deposit} 
+         <input type='number' className='add-input-content' min="0" value={order_item.cost_price} 
                  onChange={(e)=>{
           dispach(set_edit_order(
             {
-              field:"customer_deposit",
-             value: e.target.value
+              field:"cost_price",
+             value: Number(e.target.value)
             }
           ))
         }}/><samp className='text-denar'>د.ع</samp>
@@ -68,21 +81,21 @@ const edate_order=Edate_Order()
           dispach(set_edit_order(
             {
               field:"order_size",
-             value: e.target.value
+             value: Number(e.target.value)
             }
           ))
           }}/>
 
           <p className='add-text-content'>سعر الـ kg الواحد:</p>
                      <input type='number' className='add-input-content' 
-                      min="0"
+                      // min="0"
                      value={order_item.price_per_km}
                            
                           onChange={(e)=>{
           dispach(set_edit_order(
             {
               field:"price_per_km",
-             value: e.target.value
+             value: Number(e.target.value)
             }
           ))
           }}/>
@@ -97,7 +110,7 @@ const edate_order=Edate_Order()
           dispach(set_edit_order(
             {
               field:"total_delivery_price",
-             value: e.target.value
+             value: Number(e.target.value)
             }
           ))
           }}
@@ -115,7 +128,7 @@ const edate_order=Edate_Order()
            />
            <p >هل تريد اضافه 5,000 د.ع اجرة توصيل </p>
                 </div>
-                  <button className="btm-content" onClick={()=>{edate_order()}}>
+                  <button disabled={status} className="btm-content" onClick={()=>{edate_order()}}>
                          <p> تعديل الطلب</p>
                         
                        </button>

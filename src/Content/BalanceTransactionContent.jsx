@@ -1,17 +1,23 @@
   import {useState} from 'react'
   import { Close_configration } from "../Compont/Svg";
   import { Amount_Depost,Amount_withdraw } from '../API/ApiContent/APIInvestors';
+  import { useSelector } from 'react-redux';
   const BalanceTransactionContent = () => {
     const [click_btm,setClick_btm]=useState("Deposit-money")
     const[Depost,setDeopst]=useState('')
     const[withdraw,setwithdraw]=useState('')
     const amount_Depost=Amount_Depost(Depost)
     const amount_withdraw=Amount_withdraw(withdraw)  
+     const status=useSelector((s)=>{
+return s.staus.statusValue
+  })
+
     return (
       <>
         <Close_configration />
         <div className="btm-transaction-mone">
           <button
+          disabled={status}
             onClick={() => {
               setClick_btm("Withdraw-money");
             }}
@@ -23,8 +29,9 @@
           >
             سحب
           </button>
-          <button
 
+          <button
+disabled={status}
             onClick={() => {
               setClick_btm("Deposit-money");
             }}

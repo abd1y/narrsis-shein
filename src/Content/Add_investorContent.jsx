@@ -1,13 +1,17 @@
 import {useState} from 'react'
 import { Add_new_investor,Close_configration } from "../Compont/Svg";
 import { Creat_investor } from '../API/ApiContent/APIInvestors';
-
+import { useSelector } from 'react-redux';
 const Add_investorContent = () => {
   const [InvestorsName,setInvestorsName]=useState("")
   const [InvestorsUser,setInvestorsUser]=useState("")
   const [investedMone,setinvestedMone]=useState(0)
   const [Customs,setCustoms]=useState(0)
   const creat_investor=Creat_investor(InvestorsName,InvestorsUser,investedMone,Customs)
+     const status=useSelector((s)=>{
+return s.staus.statusValue
+  })
+
   return (
   <>
 
@@ -43,7 +47,7 @@ const Add_investorContent = () => {
                 setCustoms(Number(value))
               }
             }} /><samp>د.ع</samp>
-            <button onClick={()=>{creat_investor()}} className="btm-content" >
+            <button disabled={status} onClick={()=>{creat_investor()}} className="btm-content" >
               <p> اضافة</p>
               <Add_new_investor /> 
             </button>

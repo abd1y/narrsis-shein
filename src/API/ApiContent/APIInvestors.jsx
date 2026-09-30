@@ -6,6 +6,7 @@ import {setInfo} from '../../Redux/Content/InfoInvester'
 import { configretionSlider } from '../../Redux/Content/ClickConfigretion'
   import { withdraw_InvestorMony,Depost_InvestorMony,Add_investor } from '../../Redux/Content/InfoInvester';
 import Notifications from "../../Modles/NaficationMessgeModel"
+import { statushandler } from "../../Redux/Content/RequestState"
 export const APIgetInvestors = () => {
 
     const dispatch = useDispatch()
@@ -50,6 +51,7 @@ const Token = useSelector((state) =>{return state.Token.value})
 
 
     const Remove_invester=()=>{
+      dispatch(statushandler(false))
   Notifications("",'Loding')
 API.delete('investors/Remove_investors/',{
   headers:{
@@ -68,6 +70,9 @@ Notifications(res.data.Mes,'correct')
 .catch(err=>{
 Notifications("حدث خطأ اثناء الحذف يرجى محاوله لاحقا",'error')
 })
+     .finally(()=>{
+         dispatch(statushandler(false))
+      })
 }
 return Remove_invester
 }
@@ -77,6 +82,7 @@ export const  Amount_Depost=(Depost)=>{
     const valueClick=  useSelector((state)=>{return state.whoclick.click_value})
  const Token = useSelector((state) =>{return state.Token.value})
     const Depost_mony=()=>{
+      dispatch(statushandler(true))
      Notifications('',"Loding")
         API.post("investors/Add_invested_money/",  
           { amount:Depost,
@@ -99,6 +105,9 @@ export const  Amount_Depost=(Depost)=>{
       .catch(err=>{
         Notifications(err.response.data.erorr,"error")
       })
+      .finally(()=>{
+         dispatch(statushandler(false))
+      })
     }
       return Depost_mony
     }
@@ -108,6 +117,7 @@ export   const Amount_withdraw=(withdraw)=>{
     const valueClick=  useSelector((state)=>{return state.whoclick.click_value})
  const Token = useSelector((state) =>{return state.Token.value})
 const withdraw_investor=()=>{
+   dispatch(statushandler(true))
                   Notifications('',"Loding")
     API.post('investors/withdraw_invested_money/',
       { amount:withdraw,
@@ -127,6 +137,9 @@ const withdraw_investor=()=>{
       .catch(err=>{
         Notifications(err.response.data.erorr,"error")
       })
+         .finally(()=>{
+         dispatch(statushandler(false))
+      })
     }
 return withdraw_investor
   }
@@ -135,6 +148,7 @@ export const Creat_investor=(name,username,investedMone,Customs)=>{
  const Token = useSelector((state) =>{return state.Token.value})
 
  const crear_investorAPI=()=>{
+  dispatch(statushandler(true))
   Notifications("",'Loding')
   API.post('investors/crear_investors/',
     {
@@ -157,6 +171,9 @@ export const Creat_investor=(name,username,investedMone,Customs)=>{
   .catch(err=>{
      Notifications(err.response.data.erorr,"error")
   })
+       .finally(()=>{
+         dispatch(statushandler(false))
+      })
  }
  return crear_investorAPI
 }

@@ -38,10 +38,8 @@ const OrderSlice=createSlice({
 export const {
 setorder,
 show_order,
-order_Updet,
 set_edit_order,
 save_edit_order,
 remove_order,
-add_order
-}=OrderSlice.actions
+add_order}=OrderSlice.actions
 export default OrderSlice.reducer
