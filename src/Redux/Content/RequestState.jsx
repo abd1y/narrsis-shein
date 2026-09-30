@@ -16,7 +16,7 @@ const RequestState=createSlice({
             s.ErorrValue=action.payload
         },
         statushandler:(s,action)=>{
-s.status=action.payload
+s.statusValue=action.payload
         }
     }
 })
