@@ -12,6 +12,7 @@
         const open_configration_reomv=useSelector((s)=>{
     return s.whoclick.value
         })
+        const Token = useSelector((state) =>{return state.Token.value})
 const order=useSelector((s)=>{
     return s.order_value.order
 })
@@ -41,8 +42,16 @@ getOrder()
         <th className="list-Table-child"> سعر التوصيل + سعر كامل لـ KG</th>
         <th className="list-Table-child"> الربح صافي</th>
         <th className="list-Table-child">  سعر الاجمالي لزبون</th>
-        <th className="list-Table-child">تعديل</th>
-            <th className="list-Table-child">حذف</th>
+        {
+                  Token && 
+                  (
+<>
+
+<th className="list-Table-child">تعديل</th>
+    <th className="list-Table-child">حذف</th>
+</>
+                )
+        }
 
 
     </tr>
@@ -65,15 +74,24 @@ getOrder()
 ).toLocaleString()}</td>
         <td className="list-Table-info">{item.net_profit.toLocaleString()}</td>
         <td className="list-Table-info">{item.order_total.toLocaleString()}</td>
-        <td className="list-Table-info"onClick={
+        
+   { 
+      Token &&
+      (
+
+      
+   <>
+  
+   <td className="list-Table-info"onClick={
             ()=>{
             dispatch(show_order(item))
             dispatch(configretionSlider("updat_Requst"))}}><Pen_icon/></td>
             <td className="list-Table-info" onClick={()=>{
                dispatch(show_order(item.id))
                 dispatch(configretionSlider("Remove_Requst"))}}><Delete_bin/></td>
-
-
+   </>
+      )
+}
 
     </tr>
         ))
