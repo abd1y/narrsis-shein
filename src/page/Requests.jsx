@@ -2,18 +2,21 @@ import { useState } from "react"
 import RequestsContent from "../Content/RequestsContent"
 import Loding from "../Compont/Loding"
 import Erorr_page from "../Compont/Erorr_page"
-
+import { useSelector } from "react-redux"
 const Requests = () => {
-    const [loding,setloding]=useState(false)
-    const [Erorr,setErorr]=useState(false)
+    const loding=useSelector((s)=>{
+return s.staus.LodingValue
+  })
+
+  const Error=useSelector((s)=>{
+return s.staus.ErorrValue
+  })
   return (
     <>
-    {
-        Erorr?(
-            <Erorr_page/>
-        ):
-       ( loding? (<Loding/>):(<RequestsContent/>))
-    }
+{
+  loding && <Loding/>
+}
+{Error?(<Erorr_page/>):(<RequestsContent/>)}
     </>
 
   )

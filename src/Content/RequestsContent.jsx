@@ -3,12 +3,23 @@
     import { configretionSlider } from "../Redux/Content/ClickConfigretion"
     import Remove_RequestContent from "./Remove_RequestContent"
     import Confirm from "../Modles/Confirm"
+    import { GetAllOrder } from "../API/ApiContent/APIorder"
+    import { useEffect } from "react"
+    import { show_order } from "../Redux/Content/Order_Redux"
+
     const RequestsContent = () => {
+        const getOrder=GetAllOrder()
         const open_configration_reomv=useSelector((s)=>{
     return s.whoclick.value
         })
-
+const order=useSelector((s)=>{
+    return s.order_value.order
+})
+useEffect(()=>{
+getOrder()
+},[])
         const dispatch=useDispatch()
+     
     return (
     <div className='Table'>
             <div className='main-item-Table'>
@@ -35,41 +46,34 @@
 
 
     </tr>
-    <tr className='main-list-Table'>
-        <td className="list-Table-info"> 1</td>
-        <td className="list-Table-info"> 2027/1/1</td>
-        <td className="list-Table-info"> نرجس</td>
-        <td className="list-Table-info">50,450</td>
-        <td className="list-Table-info"> 0</td>
-        <td className="list-Table-info">153,250</td>
-        <td className="list-Table-info">4</td>
-        <td className="list-Table-info" >10,000</td>
-        <td className="list-Table-info">950,000</td>
-        <td className="list-Table-info">1,500,000</td>
-        <td className="list-Table-info"onClick={()=>dispatch(configretionSlider("updat_Requst"))}><Pen_icon/></td>
-            <td className="list-Table-info" onClick={()=>dispatch(configretionSlider("Remove_Requst"))}><Delete_bin/></td>
+    {
+        order.map((item)=>(
+                <tr className='main-list-Table' key={item.id} id={item.id}>
+        <td className="list-Table-info"> {item.number_order}</td>
+        <td className="list-Table-info" style={{width:"15%"}}>{item.order_data}</td>
+        <td className="list-Table-info"> {item.Customer_name}</td>
+        <td className="list-Table-info"> {item.selling_price.toLocaleString()}</td>
+        <td className="list-Table-info">{item.customer_deposit.toLocaleString()}</td>
+        <td className="list-Table-info">{item.cost_price.toLocaleString()}</td>
+        <td className="list-Table-info" title={`سعر الـ kg الواحد هو ${item.price_per_km.toLocaleString()}د.ع`}>{item.order_size}</td>
+        <td className="list-Table-info" 
+        title={`سعر الكامل لكل kg هو ${item.total_price_per_kg.toLocaleString()}د.ع و سعر  تكلفه توصيل الطلبيه هو ${item.total_delivery_price.toLocaleString()}د.ع و سعر توصيل الى بيت الزبون هو ${item.delivery_price.toLocaleString()}د.ع`} >
+            {(item.total_price_per_kg +item.total_delivery_price +item.delivery_price).toLocaleString()}</td>
+        <td className="list-Table-info">{item.net_profit.toLocaleString()}</td>
+        <td className="list-Table-info">{item.order_total.toLocaleString()}</td>
+        <td className="list-Table-info"onClick={
+            ()=>{
+            dispatch(show_order(item))
+            dispatch(configretionSlider("updat_Requst"))}}><Pen_icon/></td>
+            <td className="list-Table-info" onClick={()=>{
+               dispatch(show_order(item.id))
+                dispatch(configretionSlider("Remove_Requst"))}}><Delete_bin/></td>
 
 
 
     </tr>
-    <tr className='main-list-Table'>
-        <td className="list-Table-info"> 1</td>
-                <td className="list-Table-info"> 2027/1/1</td>
-        <td className="list-Table-info"> نرجس</td>
-        <td className="list-Table-info"> 1,250,450</td>
-        <td className="list-Table-info"> 250,450</td>
-        <td className="list-Table-info">153,250</td>
-        <td className="list-Table-info">4</td>
-        <td className="list-Table-info">10,000</td>
-        <td className="list-Table-info">950,000</td>
-        <td className="list-Table-info">1,500,000</td>
-        <td className="list-Table-info " onClick={()=>dispatch(configretionSlider("updat_Requst"))}><Pen_icon/></td>
-            <td className="list-Table-info" onClick={()=>dispatch(configretionSlider("Remove_Requst"))}><Delete_bin/></td>
-
-
-
-
-    </tr>
+        ))
+    }
 
 
 

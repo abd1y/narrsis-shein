@@ -21,13 +21,28 @@ const Add_investorContent = () => {
             <p className="add-text-content">
               مبلغ المستثمر <small>(مع اضافه الاصفار):</small>
             </p>
-            <input className="add-input-content" type="number" value={investedMone}
-             onChange={(e)=>{setinvestedMone(Number(e.target.value))}}/><samp>د.ع</samp>
+<input
+  className="add-input-content"
+  type="text"
+  value={investedMone.toLocaleString()}
+  onChange={(e) => {
+    const value = e.target.value.replace(/,/g, "");
+    if (!isNaN(value)) {
+      setinvestedMone(Number(value));
+    }
+  }}
+/><samp>د.ع</samp>
             <p className="add-text-content">
           
               مدفوعات الكمركيه <small> (ان وجدت):</small>
             </p>
-            <input className="add-input-content" type="number" value={Customs} onChange={(e)=>{setCustoms(Number(e.target.value))}} /><samp>د.ع</samp>
+            <input className="add-input-content" type="text" 
+            value={Customs.toLocaleString()} onChange={(e)=>{
+              const value=e.target.value.replace(/,/g,"")
+              if(!isNaN(value)){
+                setCustoms(Number(value))
+              }
+            }} /><samp>د.ع</samp>
             <button onClick={()=>{creat_investor()}} className="btm-content" >
               <p> اضافة</p>
               <Add_new_investor /> 
