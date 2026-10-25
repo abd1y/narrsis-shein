@@ -7,6 +7,7 @@ import { configretionSlider } from '../../Redux/Content/ClickConfigretion'
   import { withdraw_InvestorMony,Depost_InvestorMony,Add_investor } from '../../Redux/Content/InfoInvester';
 import Notifications from "../../Modles/NaficationMessgeModel"
 import { statushandler } from "../../Redux/Content/RequestState"
+
 export const APIgetInvestors = () => {
 
     const dispatch = useDispatch()
@@ -34,6 +35,7 @@ const Token = useSelector((state) =>{return state.Token.value})
 
             dispatch(setloding(false))
             dispatch(setInfo(Info_invester))
+            
         })
         .catch(err => {
            dispatch( seterorr(true))

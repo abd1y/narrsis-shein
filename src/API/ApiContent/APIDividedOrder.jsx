@@ -89,3 +89,30 @@ export const Add_divided_order=(number_order)=>{
             }
             return add_divided_order
 }
+
+
+export const GetInvestorsForDivided = () => {
+    const dispatch = useDispatch()
+    const Token = useSelector(state => state.Token.value)
+
+    const getInvestors = () => {
+        API.get('investors/getInvestors/', {
+            headers: {
+                Authorization: `Token ${Token}`
+            }
+        })
+        .then(res => {
+            dispatch(Set_Investor(
+                res.data.Investors.map(item => ({
+                    InvestorsName: item.InvestorsName,
+                    InvestorsUser: item.InvestorsUser
+                }))
+            ))
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    return getInvestors
+}

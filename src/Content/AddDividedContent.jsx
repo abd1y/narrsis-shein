@@ -1,8 +1,11 @@
 import { Close_configration,Arrow_up,Arrow_down } from "../Compont/Svg"
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import { useSelector,useDispatch } from "react-redux"
 import { setSelectedInvestors } from "../Redux/Content/DividedOrder"
-import { Add_divided_order } from "../API/ApiContent/APIDividedOrder"
+import {
+    Add_divided_order,
+    GetInvestorsForDivided
+} from "../API/ApiContent/APIDividedOrder"
 const AddDividedContent = () => {
     const [list,setList]=useState(false)
     const [numberOrder,setNumberOrder]=useState(0)
@@ -12,8 +15,12 @@ const AddDividedContent = () => {
     const add_divided_order=Add_divided_order(numberOrder)
         const invister = useSelector(s => s.Dividedorder.invister)
         const selectedInvestors = useSelector(s => s.Dividedorder.selectedInvestors)
-
         const dispatch=useDispatch()
+        const getInvestors = GetInvestorsForDivided()
+
+useEffect(() => {
+    getInvestors()
+}, [])
   return (
     <>
       <Close_configration/>
