@@ -1,15 +1,20 @@
 import DividedContent from "../Content/DividedContent"
-import { useState } from "react"
+import { useSelector } from "react-redux"
 import Loding from "../Compont/Loding"
 import Erorr_page from "../Compont/Erorr_page"
 const Divided = () => {
-  const [loding,setLoding]=useState(false)
-  const [erorr,seterorr]=useState(false)
+  const loding=useSelector((s)=>{
+return s.staus.LodingValue
+  })
+  const Error=useSelector((s)=>{
+return s.staus.ErorrValue
+  })
   return (
     <>
+      {loding &&<Loding/>}
     {
-      erorr?(<Erorr_page/>):
-    loding?(<Loding/>):( <DividedContent/>)
+    
+    Error?(<Erorr_page/>):( <DividedContent/>)
    
     
     }

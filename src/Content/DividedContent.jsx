@@ -3,13 +3,22 @@ import { useDispatch,useSelector } from 'react-redux'
 import { configretionSlider } from '../Redux/Content/ClickConfigretion'
 import Remove_divided from './Remov_divided'
 import Confirm from '../Modles/Confirm'
-
+import { useState,useEffect } from 'react'
+import { GetAllDividedOrder } from '../API/ApiContent/APIDividedOrder'
+import { show_divided_order } from '../Redux/Content/DividedOrder'
 const DividedContent = () => {
-
+const info = useSelector(s => s.Dividedorder.divided)
+const investor = useSelector(s => s.Dividedorder.invister)
     const open_configration_remov=useSelector((s)=>{
     return s.whoclick.value
 })
     const dispatch=useDispatch()
+    const APIGetAllDividedOrder=GetAllDividedOrder()
+
+    useEffect(()=>{
+        APIGetAllDividedOrder()
+    },[])
+
   return (
     <div className='Table'>
        <div className='main-item-Table'>
@@ -21,26 +30,39 @@ const DividedContent = () => {
     <table className='list-Table'>
         <tr className='main-list-Table'>
             <th className='list-Table-child'>رقم الطلب</th>
-            <th className='list-Table-child'>نرجس</th>
-            <th className='list-Table-child'>مجمد</th>
-            <th className='list-Table-child'>عبدالله</th>
-            <th className='list-Table-child'>فاطمه</th>
+ {[...new Map(investor.map(item => [item.InvestorsName, item])).values()].map((item, index) => (
+    <th className="list-Table-child" key={index}>
+        {item.InvestorsName}
+    </th>
+))}
+        
             <th className='list-Table-child'>عدد مشاركين في طلب</th>
             <th className='list-Table-child'>اجمالي الكمركيه <small>(التوصيل+ سعر الكيلو الاجمالي)</small></th>
             <th className='list-Table-child'>الارباح لكل مستثمر</th>
             <th className='list-Table-child'>حذف</th>
         </tr>
+        {
+info.map((item)=>(
+
         <tr className="main-list-Table">
-            <td className="list-Table-info">1</td>
-            <td className="list-Table-info">شارك</td>
-            <td className="list-Table-info">لم يشارك</td>
-            <td className="list-Table-info">لم يشار</td>
-            <td className="list-Table-info">لم يشارك</td>
-            <td className="list-Table-info">1 </td>
-            <td className="list-Table-info">20,000</td>
-            <td className="list-Table-info">4,0000</td>
-            <td className="list-Table-info" onClick={()=>{dispatch(configretionSlider("Remove-Divided"))}}><Delete_bin/></td>
+            <td className="list-Table-info">{item.number_order}</td>
+            {item.invester.map(item=>(
+
+      <td className="list-Table-info">{item.invested?"شارك":"لم يشارك"}</td>
+            ))}
+            <td className="list-Table-info">{item.invester_counted} </td>
+            <td className="list-Table-info">{item.CustomsTotal.toLocaleString()}</td>
+            <td className="list-Table-info">{item.profit_for_invester.toLocaleString()}</td>
+            <td className="list-Table-info" onClick={
+                ()=>{
+                    dispatch(configretionSlider("Remove-Divided"))
+                    dispatch(show_divided_order(item.id))
+                }
+                
+                }><Delete_bin/></td>
         </tr>
+))
+        }
        
     </table>
      <button className='Add-Table'  onClick={()=>{dispatch(configretionSlider("add-Divided"))}} >

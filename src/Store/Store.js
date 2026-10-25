@@ -4,12 +4,14 @@ import TokenSlice from "../Redux/Content/TokenSlice";
 import RequestState from '../Redux/Content/RequestState'
 import Infoinvestor from "../Redux/Content/InfoInvester"
 import OrderSlice from '../Redux/Content/Order_Redux'
+import dividedorder from '../Redux/Content/DividedOrder'
 export const Store=configureStore({
     reducer:{
         Token:TokenSlice,
         whoclick:click_configretion,
         staus:RequestState,
         infoValue:Infoinvestor,
-        order_value:OrderSlice
+        order_value:OrderSlice,
+        Dividedorder:dividedorder
     },
 })

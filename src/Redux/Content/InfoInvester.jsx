@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import Add_investorContent from "../../Content/Add_investorContent";
+
 
 const initialSlice={
     info:[]

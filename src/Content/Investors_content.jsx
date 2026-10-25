@@ -22,7 +22,7 @@ getinvester()
         <div className='main-item-Table'>
 
        
-<div className='Logo-Table'>
+<div className='Logo-Table' >
     <h3 className='Logo-Table-Text'>المستثمرين</h3>
 </div>
 
