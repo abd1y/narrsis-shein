@@ -31,7 +31,7 @@ getinvester()
     <th className="list-Table-child"> التسلسل</th>
     <th className="list-Table-child">اسم المستثمر</th>
     <th className="list-Table-child"> اسم مستخدم</th>
-    <th className="list-Table-child">مدفوعات الكمركيه</th>
+
     {
         Token &&
         <>
@@ -42,6 +42,7 @@ getinvester()
     }
     
         <th className="list-Table-child">الارباح</th>
+            <th className="list-Table-child">النسبه % من الشركه</th>
         {
             Token &&
             <>
@@ -58,7 +59,7 @@ info.map((item,index)=>(
     <td className="list-Table-info"> {index+1}</td>
     <td className="list-Table-info"> {item.InvestorsName}</td>
     <td className="list-Table-info"> {item.InvestorsUser}</td>
-    <td className="list-Table-info"> {item.Customs.toLocaleString()}</td>
+
     {
         Token &&
         <>
@@ -68,7 +69,7 @@ info.map((item,index)=>(
         </>
     }
     <td className="list-Table-info">{item.profits.toLocaleString()}</td>
-    
+        <td className="list-Table-info"> {item.investor_percentage} % </td>
     {
         Token &&
 

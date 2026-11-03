@@ -39,7 +39,7 @@ const Token = useSelector((state) =>{return state.Token.value})
         
             <th className='list-Table-child'>عدد مشاركين في طلب</th>
             <th className='list-Table-child'>اجمالي الكمركيه <small>(التوصيل+ سعر الكيلو الاجمالي)</small></th>
-            <th className='list-Table-child'>الارباح لكل مستثمر</th>
+            <th className='list-Table-child'> ربح النهائي </th>
             {
                 Token &&
 
@@ -53,11 +53,11 @@ info.map((item)=>(
             <td className="list-Table-info">{item.number_order}</td>
             {item.invester.map(item=>(
 
-      <td className="list-Table-info">{item.invested?"شارك":"لم يشارك"}</td>
+      <td className="list-Table-info" title={`${item.InvestorsName}:/ يمتلك نسبه:${item.investor_percentage}% / ارباح من طلب: ${item.profit_for_invester.toLocaleString()}`}>{item.invested?"شارك":"لم يشارك"}</td>
             ))}
             <td className="list-Table-info">{item.invester_counted} </td>
             <td className="list-Table-info">{item.CustomsTotal.toLocaleString()}</td>
-            <td className="list-Table-info">{item.profit_for_invester.toLocaleString()}</td>
+            <td className="list-Table-info">{item.net_profit.toLocaleString()}</td>
  {
                 Token &&
  

@@ -28,7 +28,7 @@ const Token = useSelector((state) =>{return state.Token.value})
                 InvestorsName: item.InvestorsName,
                 InvestorsUser: item.InvestorsUser,
                 profits: item.profits,
-                Customs: item.Customs,
+                investor_percentage: item.investor_percentage,
                 investedMone: item.investedMone,
                 Withdrawn: item.Withdrawn
             }))
@@ -145,7 +145,7 @@ const withdraw_investor=()=>{
     }
 return withdraw_investor
   }
-export const Creat_investor=(name,username,investedMone,Customs)=>{
+export const Creat_investor=(name,username,investedMone)=>{
   const dispatch=useDispatch()
  const Token = useSelector((state) =>{return state.Token.value})
 
@@ -157,7 +157,7 @@ export const Creat_investor=(name,username,investedMone,Customs)=>{
       InvestorsName:name,
       InvestorsUser:username,
       investedMone:investedMone,
-      Customs:Customs
+      
     },
      {
           headers:{
