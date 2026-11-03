@@ -13,9 +13,9 @@ const Menu = () => {
   return (
     <div className="Main-Menu">
       <ul className="Menu" dir="rtl">
-       {
-    Token&& 
-     (   <Link
+       
+  
+       <Link
         
           className={
             activeMenu == "investors"
@@ -29,8 +29,8 @@ const Menu = () => {
           >
             المستثمرين
           </li>
-        </Link>)
-       }
+        </Link>
+       
         <Link
           className={
             activeMenu == "Requests" ? "Menu-active Menu-chaild" : "Menu-chaild"

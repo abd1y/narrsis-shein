@@ -12,6 +12,7 @@ const investor = useSelector(s => s.Dividedorder.invister)
     const open_configration_remov=useSelector((s)=>{
     return s.whoclick.value
 })
+const Token = useSelector((state) =>{return state.Token.value})
     const dispatch=useDispatch()
     const APIGetAllDividedOrder=GetAllDividedOrder()
 
@@ -39,7 +40,11 @@ const investor = useSelector(s => s.Dividedorder.invister)
             <th className='list-Table-child'>عدد مشاركين في طلب</th>
             <th className='list-Table-child'>اجمالي الكمركيه <small>(التوصيل+ سعر الكيلو الاجمالي)</small></th>
             <th className='list-Table-child'>الارباح لكل مستثمر</th>
+            {
+                Token &&
+
             <th className='list-Table-child'>حذف</th>
+            }
         </tr>
         {
 info.map((item)=>(
@@ -53,6 +58,9 @@ info.map((item)=>(
             <td className="list-Table-info">{item.invester_counted} </td>
             <td className="list-Table-info">{item.CustomsTotal.toLocaleString()}</td>
             <td className="list-Table-info">{item.profit_for_invester.toLocaleString()}</td>
+ {
+                Token &&
+ 
             <td className="list-Table-info" onClick={
                 ()=>{
                     dispatch(configretionSlider("Remove-Divided"))
@@ -60,16 +68,21 @@ info.map((item)=>(
                 }
                 
                 }><Delete_bin/></td>
+ }
         </tr>
 ))
         }
        
     </table>
+     {
+                Token &&
+     
      <button className='Add-Table'  onClick={()=>{dispatch(configretionSlider("add-Divided"))}} >
     
     
         <Add_content/>
         </button>
+     }
         {
       open_configration_remov==="Remove-Divided" &&(
           Confirm("Confirm-S",<Remove_divided />)

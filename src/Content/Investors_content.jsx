@@ -32,11 +32,24 @@ getinvester()
     <th className="list-Table-child">اسم المستثمر</th>
     <th className="list-Table-child"> اسم مستخدم</th>
     <th className="list-Table-child">مدفوعات الكمركيه</th>
-    <th className="list-Table-child">مجموع الاموال مسحوبه </th>
+    {
+        Token &&
+        <>
+        <th className="list-Table-child">مجموع الاموال مسحوبه </th>
+        
         <th className="list-Table-child">المبلغ المستثمر</th>
+        </>
+    }
+    
         <th className="list-Table-child">الارباح</th>
-    <th className="list-Table-child list-delete-child">سحب او ايداع</th>
-    <th className="list-Table-child list-delete-child"> حذف</th>
+        {
+            Token &&
+            <>
+            
+            <th className="list-Table-child list-delete-child">سحب او ايداع</th>
+            <th className="list-Table-child list-delete-child"> حذف</th>
+            </>
+        }
 </tr>
 {
 info.map((item,index)=>(
@@ -45,11 +58,22 @@ info.map((item,index)=>(
     <td className="list-Table-info"> {index+1}</td>
     <td className="list-Table-info"> {item.InvestorsName}</td>
     <td className="list-Table-info"> {item.InvestorsUser}</td>
-    <td className="list-Table-info">{item.Customs.toLocaleString()}</td>
+    {
+        Token &&
+        <>
+        <td className="list-Table-info"> {item.Customs.toLocaleString()}</td>
+   
     <td className="list-Table-info">{item.Withdrawn.toLocaleString()}</td>
+        </>
+    }
     <td className="list-Table-info">{item.investedMone.toLocaleString()}</td>
     <td className="list-Table-info">{item.profits.toLocaleString()}</td>
     
+    {
+        Token &&
+
+        <>
+        
     <td className="list-Table-info"  onClick={()=>
 {
 dispatch(clickValueHandler(item.id))
@@ -66,15 +90,20 @@ dispatch(configretionSlider("Remove-investors"))
 }>
 <Delete_bin/>
 </td> 
+        </>
+    }
 
 </tr>
 ))
 
 }
+{
+    Token &&
     <button className='Add-Table' 
       onClick={()=>{dispatch(configretionSlider("Add-investors"))}}>
     <Add_content/>
     </button>
+}
 {open_configration_remov==="Remove-investors" &&
 (Confirm("Confirm-S",<Remove_investorContent  />))}
 </table>

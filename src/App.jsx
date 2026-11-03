@@ -13,9 +13,7 @@ import BalanceTransaction from "./Compont/BalanceTransaction"
 import { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux"
 function App() {
-  const Token = useSelector((state) =>{
-    return state.Token.value
-  } )
+
 
   return (
    <>
@@ -24,11 +22,10 @@ function App() {
 <Login />
 <Menu />
 <Routes>
-  <Route path="/" element={<Navigate to={"/Requests"} replace/>}/> 
-  {
-Token&&
+  <Route path="/" element={<Navigate to={"/investors"} replace/>}/> 
+  
   <Route path='/investors' element={<Investors/>}/>
-  }
+
   <Route path='/Requests' element={<Requests/>}/>
   <Route path='/divided' element={<Divided/>}/>
 
