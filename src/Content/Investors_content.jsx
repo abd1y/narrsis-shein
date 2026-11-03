@@ -58,15 +58,15 @@ info.map((item,index)=>(
     <td className="list-Table-info"> {index+1}</td>
     <td className="list-Table-info"> {item.InvestorsName}</td>
     <td className="list-Table-info"> {item.InvestorsUser}</td>
+    <td className="list-Table-info"> {item.Customs.toLocaleString()}</td>
     {
         Token &&
         <>
-        <td className="list-Table-info"> {item.Customs.toLocaleString()}</td>
    
     <td className="list-Table-info">{item.Withdrawn.toLocaleString()}</td>
+    <td className="list-Table-info">{item.investedMone.toLocaleString()}</td>
         </>
     }
-    <td className="list-Table-info">{item.investedMone.toLocaleString()}</td>
     <td className="list-Table-info">{item.profits.toLocaleString()}</td>
     
     {
