@@ -31,7 +31,7 @@ const OrderSlice=createSlice({
             s.order=s.order.filter(item=>item.id !== action.payload.id)
         },
         add_order:(s,action)=>{
-            s.order.push(action.payload)
+            s.order.unshift(action.payload)
         }
     }
 })

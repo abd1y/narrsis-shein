@@ -133,7 +133,12 @@ const withdraw_investor=()=>{
     )
     .then(res=>{
   Notifications(res.data.Mes,"correct")
-  dispatch(withdraw_InvestorMony({id:valueClick,investedMone: res.data.investedMone,Withdrawn:res.data.Withdrawn}))
+dispatch(withdraw_InvestorMony({
+    id: valueClick,
+    amount: withdraw,
+    investedMone: res.data.investedMone,
+    Withdrawn: res.data.Withdrawn
+}));
   dispatch(configretionSlider(null))
     })
       .catch(err=>{

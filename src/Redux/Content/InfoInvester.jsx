@@ -31,15 +31,21 @@ const Infoinvestor=createSlice({
         },
 withdraw_InvestorMony: (s, action) => {
     s.info = updatePercentages(
-        s.info.map(item =>
-            item.id === action.payload.id
-                ? {
-                    ...item,
-                    investedMone: action.payload.investedMone,
-                    Withdrawn: action.payload.Withdrawn
-                }
-                : item
-        )
+        s.info.map(item => {
+            if (item.id !== action.payload.id) return item;
+
+            const amount = Number(action.payload.amount);
+            const profits = Number(item.profits) || 0;
+
+            const profitDeduction = Math.min(profits, amount);
+
+            return {
+                ...item,
+                investedMone: action.payload.investedMone,
+                Withdrawn: action.payload.Withdrawn,
+                profits: profits - profitDeduction
+            };
+        })
     );
 },
 

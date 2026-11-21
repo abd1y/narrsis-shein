@@ -27,7 +27,7 @@ const dividedorder=createSlice({
             s.selectedInvestors = action.payload
         },
         addDivided: (s, action) => {
-    s.divided.push(action.payload)
+    s.divided.unshift(action.payload)
 }
     }
 })
